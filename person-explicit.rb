@@ -1,6 +1,6 @@
 class Person < ApplicationRecord
   def save_object
-    if create
+    if create?
       strip_and_downcase_username
       set_default_color_theme
     end
