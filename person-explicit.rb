@@ -5,16 +5,16 @@ class Person < ApplicationRecord
       set_default_color_theme
     end
 
-    validates_presence_of(:username, :email, :address)
-    validates_uniqueness_of(:username)
+    validate_presence_of(:username, :email, :address)
+    validate_uniqueness_of(:username)
     
     if create?
-      validates_confirmation_of(:email) 
-      validates_acceptance_of(terms_of_service) 
+      validate_confirmation_of(:email) 
+      validate_acceptance_of(terms_of_service) 
     end
 
     if in_moderation_mode?
-      validates_presence_of(:profession, :workspace) 
+      validate_presence_of(:profession, :workspace) 
     end
     
     if create?
