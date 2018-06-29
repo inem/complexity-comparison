@@ -1,12 +1,25 @@
 class Person < ApplicationRecord
   def save_object
     validates_presence_of(:username, :email, :address)
-    validates_confirmation_of(:email) if create?
-    validates_acceptance_of(terms_of_service) if create?
-    validates_presence_of(:profession, :workspace) if in_moderation_mode?
-    geocode if create?
+    
+    if create?
+      validates_confirmation_of(:email) 
+      validates_acceptance_of(terms_of_service) 
+    end
+
+    if in_moderation_mode?
+      validates_presence_of(:profession, :workspace) 
+    end
+    
+    if create?
+      geocode 
+    end
+  
     save
-    create_organization if create? && create_organization?
+    
+    if create? && create_organization?
+      create_organization 
+    end
   end
 
   def create_default_organization
