@@ -1,6 +1,12 @@
 class Person < ApplicationRecord
   def save_object
+    if create
+      strip_and_downcase_username
+      set_default_color_theme
+    end
+
     validates_presence_of(:username, :email, :address)
+    validates_uniqueness_of(:username)
     
     if create?
       validates_confirmation_of(:email) 
