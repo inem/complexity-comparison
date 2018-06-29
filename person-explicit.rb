@@ -10,7 +10,7 @@ class Person < ApplicationRecord
     
     if create?
       validate_confirmation_of(:email) 
-      validate_acceptance_of(terms_of_service) 
+      validate_acceptance_of(:terms_of_service) 
     end
 
     if in_moderation_mode?
