@@ -1,7 +1,5 @@
 class Person < ApplicationRecord
   def save_object
-    strip_and_downcase_username if create?
-    set_default_color_theme if create? && !in_moderation_mode?
     validates_presence_of(:username, :email, :address)
     validates_confirmation_of(:email) if create?
     validates_acceptance_of(terms_of_service) if create?
@@ -22,7 +20,4 @@ class Person < ApplicationRecord
   def create_organization?
     !!create_an_organization
   end
-
-  def strip_and_downcase_username; end
-  def set_default_color_theme; end
 end
